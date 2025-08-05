@@ -463,7 +463,7 @@ function ServiceItemPB({
                   {/* Boarding stage tooltip */}
                   {serviceItem.boarding_stages && (
                     <div
-                      className="hidden group-hover:block absolute top-[29%] left-[46%] ml-2 text-white px-3 py-2 rounded-[10px] whitespace-normal z-10 shadow-service  "
+                      className="hidden group-hover:block absolute top-[29%] left-[35%] ml-2 text-white px-3 py-2 rounded-[10px] whitespace-normal z-10 shadow-service  "
                       style={{ backgroundColor: colors.tooltipColor }}
                     >
                       <div
@@ -502,7 +502,7 @@ function ServiceItemPB({
                   {/* Dropping stage tooltip */}
                   {serviceItem.dropoff_stages && (
                     <div
-                      className={`hidden group-hover:block absolute top-[46%] left-[46%] ml-2 text-white px-3 py-2 rounded-[10px] whitespace-normal z-10 shadow-service`}
+                      className={`hidden group-hover:block absolute top-[46%] left-[35%] ml-2 text-white px-3 py-2 rounded-[10px] whitespace-normal z-10 shadow-service`}
                       style={{ backgroundColor: colors.tooltipColor }}
                     >
                       {/* Tooltip arrow */}
@@ -596,31 +596,131 @@ function ServiceItemPB({
           >
             {/* Rating */}
             <div>
-              <div className="flex items-center relative">
+              <div className="flex items-center ">
                 <div
                   className="flex items-center cursor-pointer "
-                  onMouseEnter={e => {
-                    const tooltip = e.currentTarget
-                      .nextElementSibling as HTMLElement;
-                    if (tooltip) tooltip.style.display = "block";
-                  }}
-                  onMouseLeave={e => {
-                    const tooltip = e.currentTarget
-                      .nextElementSibling as HTMLElement;
-                    if (tooltip) tooltip.style.display = "none";
-                  }}
                   style={{ color: isSoldOut ? "#c0c0c0" : "" }}
                 >
                   {/* {renderIcon("rating", "14px")} */}
                   <div className="flex items-center">
-                    <div className="w-[18px] h-auto mr-[4px]">
+                    <div className="w-[18px] h-auto mr-[4px] relative">
                       <img
                         src={serviceItem.icons.rating}
                         alt="origin"
                         className={`w-[16px] h-[16px] mr-[4px] object-contain mb-[2px] ${
                           isSoldOut ? "grayscale" : ""
                         }`}
+                        onMouseEnter={e => {
+                          const tooltip = e.currentTarget
+                            .nextElementSibling as HTMLElement;
+                          if (tooltip) tooltip.style.display = "block";
+                        }}
+                        onMouseLeave={e => {
+                          const tooltip = e.currentTarget
+                            .nextElementSibling as HTMLElement;
+                          if (tooltip) tooltip.style.display = "none";
+                        }}
                       />
+                      <div
+                        className="hidden group-hover:block absolute left-[80px] -bottom-[160px] z-20 mt-2 w-[280px] rounded-lg shadow-service-2 bg-white overflow-hidden  rounded-[14px] border-[2px]"
+                        style={{
+                          borderColor: colors.ratingBorderColor,
+                          color: isSoldOut ? "#c0c0c0" : "",
+                        }}
+                      >
+                        <div className="pt-[20px] text-center">
+                          <div className="text-[13px] bold-text text-[#464647]">
+                            PUNTUACIÓN
+                          </div>
+                          <div className="text-[13px] font-light text-[#464647]">
+                            {serviceItem.operator_service_name}
+                          </div>
+                        </div>
+
+                        {/* Rating categories */}
+                        <div className="px-3 py-2 flex flex-col gap-[10px]">
+                          {[
+                            { key: "1", label: "Calidad del bus" },
+                            { key: "2", label: "Puntualidad" },
+                            {
+                              key: "3",
+                              label: "Calidad del servicio",
+                            },
+                            {
+                              key: "4",
+                              label: "Recomendación del servicio",
+                            },
+                          ].map((rating, index, array) => {
+                            const isLast = index === array.length - 1;
+                            // Use operator_details[6] for rating values
+                            const ratingData =
+                              serviceItem.operator_details[6] || {};
+                            const value = ratingData?.[rating.key] || 0;
+                            return (
+                              <div
+                                key={rating.key}
+                                className={`flex items-center ${
+                                  isLast ? "mb-2" : ""
+                                }`}
+                              >
+                                <div className="relative w-[3rem] h-[3rem]">
+                                  <div className="absolute inset-0 w-full h-full rounded-full">
+                                    <div className="w-full h-full rounded-full border-[2px] border-[lightgray]"></div>
+                                  </div>
+
+                                  {/* Colored progress arc based on value */}
+                                  <div className="absolute inset-0 w-full h-full">
+                                    <svg
+                                      className="w-full h-full"
+                                      viewBox="0 0 100 100"
+                                    >
+                                      <circle
+                                        cx="50"
+                                        cy="50"
+                                        r="48"
+                                        fill="none"
+                                        strokeWidth="4"
+                                        stroke={
+                                          value >= 4
+                                            ? "#00A650"
+                                            : colors.ratingBorderColor
+                                        }
+                                        strokeDasharray={
+                                          value > 0
+                                            ? `${value * 75.4} 301.6`
+                                            : "150.8 301.6"
+                                        }
+                                        strokeDashoffset="75.4"
+                                        transform="rotate(-90, 50, 50)"
+                                      />
+                                    </svg>
+                                  </div>
+
+                                  {/* Center with value */}
+                                  <div className="absolute inset-0 flex items-center justify-center top-[40%] left-[36%]">
+                                    <span className="text-[#464647] font-medium text-[12px] ">
+                                      {value.toFixed(1)}
+                                    </span>
+                                  </div>
+                                </div>
+
+                                <span className="text-[#464647] text-[13px] ml-[10px]">
+                                  {rating.label}
+                                </span>
+                              </div>
+                            );
+                          })}
+                        </div>
+
+                        {/* Footer */}
+                        <div
+                          className="px-1 py-2 text-center text-[12px] text-[#ff8f45]"
+                          style={{ backgroundColor: colors.ratingBottomColor }}
+                        >
+                          Esta puntuación se obtuvo de las opiniones de{" "}
+                          {serviceItem.operator_details[5] || 0} usuarios.
+                        </div>
+                      </div>
                     </div>
                     <span className="text-[#464647] bold-text">
                       {typeof serviceItem.operator_details[1] === "number"
@@ -634,105 +734,6 @@ function ServiceItemPB({
                 </div>
 
                 {/* Rating tooltip */}
-                <div
-                  className="hidden absolute left-[40%] z-20 mt-2 w-[280px] rounded-lg shadow-service-2 bg-white overflow-hidden  rounded-[14px] border-[2px]"
-                  style={{
-                    borderColor: colors.ratingBorderColor,
-                    color: isSoldOut ? "#c0c0c0" : "",
-                  }}
-                >
-                  <div className="pt-[20px] text-center">
-                    <div className="text-[13px] bold-text text-[#464647]">
-                      PUNTUACIÓN
-                    </div>
-                    <div className="text-[13px] font-light text-[#464647]">
-                      {serviceItem.operator_service_name}
-                    </div>
-                  </div>
-
-                  {/* Rating categories */}
-                  <div className="px-3 py-2 flex flex-col gap-[10px]">
-                    {[
-                      { key: "1", label: "Calidad del bus" },
-                      { key: "2", label: "Puntualidad" },
-                      {
-                        key: "3",
-                        label: "Calidad del servicio",
-                      },
-                      {
-                        key: "4",
-                        label: "Recomendación del servicio",
-                      },
-                    ].map((rating, index, array) => {
-                      const isLast = index === array.length - 1;
-                      // Use operator_details[6] for rating values
-                      const ratingData = serviceItem.operator_details[6] || {};
-                      const value = ratingData?.[rating.key] || 0;
-                      return (
-                        <div
-                          key={rating.key}
-                          className={`flex items-center ${
-                            isLast ? "mb-2" : ""
-                          }`}
-                        >
-                          <div className="relative w-[3rem] h-[3rem]">
-                            <div className="absolute inset-0 w-full h-full rounded-full">
-                              <div className="w-full h-full rounded-full border-[2px] border-[lightgray]"></div>
-                            </div>
-
-                            {/* Colored progress arc based on value */}
-                            <div className="absolute inset-0 w-full h-full">
-                              <svg
-                                className="w-full h-full"
-                                viewBox="0 0 100 100"
-                              >
-                                <circle
-                                  cx="50"
-                                  cy="50"
-                                  r="48"
-                                  fill="none"
-                                  strokeWidth="4"
-                                  stroke={
-                                    value >= 4
-                                      ? "#00A650"
-                                      : colors.ratingBorderColor
-                                  }
-                                  strokeDasharray={
-                                    value > 0
-                                      ? `${value * 75.4} 301.6`
-                                      : "150.8 301.6"
-                                  }
-                                  strokeDashoffset="75.4"
-                                  transform="rotate(-90, 50, 50)"
-                                />
-                              </svg>
-                            </div>
-
-                            {/* Center with value */}
-                            <div className="absolute inset-0 flex items-center justify-center top-[40%] left-[36%]">
-                              <span className="text-[#464647] font-medium text-[12px] ">
-                                {value.toFixed(1)}
-                              </span>
-                            </div>
-                          </div>
-
-                          <span className="text-[#464647] text-[13px] ml-[10px]">
-                            {rating.label}
-                          </span>
-                        </div>
-                      );
-                    })}
-                  </div>
-
-                  {/* Footer */}
-                  <div
-                    className="px-1 py-2 text-center text-[12px] text-[#ff8f45]"
-                    style={{ backgroundColor: colors.ratingBottomColor }}
-                  >
-                    Esta puntuación se obtuvo de las opiniones de{" "}
-                    {serviceItem.operator_details[5] || 0} usuarios.
-                  </div>
-                </div>
               </div>
             </div>
 
@@ -980,7 +981,7 @@ function ServiceItemPB({
       {serviceItem?.offer_text && (
         <div
           className={`${
-            isSoldOut ? "bg-[#ddd]" : "bg-[#FF6B6B]"
+            isSoldOut ? "bg-[#ddd]" : "bg-[#ff5c60]"
           }  text-white p-[10px_15px] text-left w-full flex items-center absolute -bottom-[36px] pt-[50px] -z-10 rounded-b-[14px] text-[14px]`}
         >
           <LottiePlayer

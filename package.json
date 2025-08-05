@@ -1,6 +1,6 @@
 {
   "name": "kupos-service-item-package",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "A reusable service item component",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -13,17 +13,14 @@
   },
   "keywords": [
     "react",
-    "service-item",
-    "recoil"
+    "service-item"
   ],
   "author": "Zahid Dar",
   "license": "MIT",
   "dependencies": {
-    "classnames": "^2.3.1",
     "lottie-react": "^2.4.1",
     "lottie-web": "^5.13.0",
-    "react": "^17.0.2",
-    "recoil": "^0.3.1"
+    "react": "^17.0.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.11",
