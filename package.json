@@ -1,12 +1,13 @@
 {
   "name": "kupos-service-item-package",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A reusable service item component",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc && node build-css.js",
+    "build": "tsc && node build-css.js && node copy-assets.js",
     "build:css": "node build-css.js",
+    "copy-assets": "node copy-assets.js",
     "prepublishOnly": "npm run build",
     "dev": "npm run start"
   },
