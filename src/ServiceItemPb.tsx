@@ -46,46 +46,46 @@ const SvgAmenities = ({
 const getAmenitiesImage = (name: string): string => {
   switch (name) {
     case "air_condtion.png": {
-      return "/images/amenities/air_condtion.svg";
+      return "./assets/images/amenities/air_condtion.svg";
     }
     case "baggage.png": {
-      return "/images/amenities/baggage.svg";
+      return "./assets/images/amenities/baggage.svg";
     }
     case "charging_plug.png": {
-      return "/images/amenities/charging_plug.svg";
+      return "./assets/images/amenities/charging_plug.svg";
     }
     case "coffee.png": {
-      return "/images/amenities/coffee.svg";
+      return "./assets/images/amenities/coffee.svg";
     }
     case "food_new_icon.png": {
-      return "/images/amenities/food_new_icon.svg";
+      return "./assets/images/amenities/food_new_icon.svg";
     }
     case "gaming.png": {
-      return "/images/amenities/gaming.svg";
+      return "./assets/images/amenities/gaming.svg";
     }
     case "handicap.png": {
-      return "/images/amenities/handicap.svg";
+      return "./assets/images/amenities/handicap.svg";
     }
     case "mobile_ticket.png": {
-      return "/images/amenities/mobile_ticket.svg";
+      return "./assets/images/amenities/mobile_ticket.svg";
     }
     case "movie.png": {
-      return "/images/amenities/movie.svg";
+      return "./assets/images/amenities/movie.svg";
     }
     case "restrooms.png": {
-      return "/images/amenities/Restrooms.svg";
+      return "./assets/images/amenities/Restrooms.svg";
     }
     case "snacks_new.png": {
-      return "/images/amenities/snacks_new.svg";
+      return "./assets/images/amenities/snacks_new.svg";
     }
     case "wifi.png": {
-      return "/images/amenities/wifi.svg";
+      return "./assets/images/amenities/wifi.svg";
     }
     case "cortina_divisoria.png": {
-      return "/images/amenities/amenity-cortina.png";
+      return "./assets/images/amenities/amenity-cortina.png";
     }
     case "frazada.png": {
-      return "/images/amenities/frazda_amenity.svg";
+      return "./assets/images/amenities/frazda_amenity.svg";
     }
     default: {
       return "";
