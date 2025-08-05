@@ -1,5 +1,5 @@
 {
-  "name": "service-item-package",
+  "name": "kupos-service-item-package",
   "version": "1.0.0",
   "description": "A reusable service item component",
   "main": "dist/index.js",
