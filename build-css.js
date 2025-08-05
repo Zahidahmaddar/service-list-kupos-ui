@@ -1,8 +1,13 @@
-const fs = require('fs');
-const path = require('path');
-const postcss = require('postcss');
-const tailwindcssPlugin = require('@tailwindcss/postcss');
-const autoprefixer = require('autoprefixer');
+import fs from 'fs';
+import path from 'path';
+import postcss from 'postcss';
+import tailwindcssPlugin from '@tailwindcss/postcss';
+import autoprefixer from 'autoprefixer';
+import { fileURLToPath } from 'url';
+
+// Get the current filename and directory name
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Read the CSS file with Tailwind directives
 const css = fs.readFileSync(path.resolve(__dirname, './src/styles.css'), 'utf8');
