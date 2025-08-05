@@ -1,0 +1,73 @@
+{
+  "serviceItem": {
+    "id": "12345",
+    "operator_details": [
+      "/images/svgs/kupos_pay.svg",
+      "5.0",
+      "Operator",
+      "serviceCategory",
+      "amenities"
+    ],
+    "rating_details": {
+      "bus_quality": 0,
+      "punctuality": 3,
+      "service_quality": 5,
+      "service_recommendation": 4,
+      "total_reviews": 125
+    },
+    "amenities": [
+      { "icon": "/images/icons/amenities/wifi.png", "label": "WiFi" },
+      { "icon": "/images/icons/amenities/air_condtion.png", "label": "A/C" },
+      { "icon": "/images/icons/amenities/headset.png", "label": "USB" },
+      { "icon": "/images/icons/amenities/movie.png", "label": "TV" }
+    ],
+    "travel_date": "26-07-2025",
+    "arrival_date": "25-07-2025",
+    "dep_time": "23:00",
+    "arr_time": "01:00",
+    "boarding_stages": "224|00:00||Terminal Sur,75|00:10||Colon,145|00:15||Plazuela Buin,144|00:20||Paine,146|00:40||Peaje Angostura,147|00:50|",
+    "dropping_stages": "4837|12:15||Terminal",
+    "available_seats": 5,
+    "seat_types": [
+      { "label": "Salon Cama", "fare": 100 },
+      { "label": "Premium", "fare": 200 },
+      { "label": "Economy", "fare": 1000 }
+    ],
+    "offer_text": "Limited time offer: 20% off!",
+    "is_direct_trip": true,
+    "train_type_label": "Tren Express (Nuevo )",
+    "show_top_label": true,
+
+    "operator_service_name": "Classe Reale",
+    "is_tracking_enabled": true,
+    "is_flexible": true,
+    "is_change_ticket": true,
+    "lottie": {
+      "location": "/images/anims/service_list/pasaje_flexible.json",
+      "flexible": "/images/anims/service_list/pasaje_flexible.json"
+    },
+    "icons": {
+      "origin": "/images/icons/origin.svg",
+      "destination": "/images/icons/destination.svg",
+      "rating": "/images/icons/Icon-star-full-orange.png",
+      "duration": "/images/icons/duration_icon.png",
+
+      "announcement": "/images/icons/promocion.svg",
+      "plus": "/images/icons/amenities/icon_plus.svg",
+      "is_direct_trip": "/images/icons/directo.png",
+      "train_type": "/images/icons/train_type.png",
+      "priority": "/images/icons/diamond-new.png"
+    },
+    "useLottieFor": ["location", "flexible"],
+    "hours": 12,
+    "change_ticket_hours": 12,
+    "busstages": {
+      "224": "Santiago sucurcal|true|false",
+      "75": "Limache sucursal|false|false",
+      "145": "Huertos sucursal|true|false",
+      "144": "SENDERO|false|false",
+      "146": "BORJA|true|false",
+      "147": "SENDERO|false|false"
+    }
+  }
+}

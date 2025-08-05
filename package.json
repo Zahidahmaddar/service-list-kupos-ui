@@ -1,0 +1,37 @@
+{
+  "name": "service-item-package",
+  "version": "1.0.0",
+  "description": "A reusable service item component",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc && node build-css.js",
+    "build:css": "node build-css.js",
+    "prepublishOnly": "npm run build",
+    "dev": "npm run start"
+  },
+  "keywords": [
+    "react",
+    "service-item",
+    "recoil"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "classnames": "^2.3.1",
+    "lottie-react": "^2.4.1",
+    "lottie-web": "^5.13.0",
+    "react": "^17.0.2",
+    "recoil": "^0.3.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.11",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
+    "tailwindcss": "^4.1.11",
+    "typescript": "^4.4.4"
+  }
+}
