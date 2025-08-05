@@ -4,6 +4,7 @@
   "description": "A reusable service item component",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "type": "module",
   "scripts": {
     "build": "tsc && node build-css.js",
     "build:css": "node build-css.js",
@@ -15,7 +16,7 @@
     "service-item",
     "recoil"
   ],
-  "author": "Your Name",
+  "author": "Zahid Dar",
   "license": "MIT",
   "dependencies": {
     "classnames": "^2.3.1",
