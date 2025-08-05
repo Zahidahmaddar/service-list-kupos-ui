@@ -5,6 +5,24 @@ import DateService from "./utils/DateService";
 import ModalEventManager from "./utils/ModalEventManager";
 import InternationalServicePopupBody from "./components/InternationalServicePopupBody";
 
+// Global variable to store the asset URL base path
+let assetBasePath = "";
+
+/**
+ * Configure the base URL for image assets in this package
+ * This should be called by the consuming application to set the proper path
+ * @param basePath - The base URL path where the assets are accessible
+ * @example
+ * // Example usage in consuming app:
+ * import { configureAssetPath } from 'kupos-service-item-package';
+ * configureAssetPath('/assets/kupos-package'); // If images are copied to public/assets/kupos-package
+ * // or
+ * configureAssetPath('https://cdn.example.com/assets'); // If using a CDN
+ */
+export function configureAssetPath(basePath: string): void {
+  assetBasePath = basePath;
+}
+
 const SvgAmenities = ({
   moreAnemities,
   name,
@@ -43,49 +61,60 @@ const SvgAmenities = ({
   );
 };
 
+/**
+ * Get the path to an amenity image
+ * Uses the assetBasePath configured by the consumer, with fallback paths
+ */
 const getAmenitiesImage = (name: string): string => {
+  // If assetBasePath is set by the consumer, use it
+  // Otherwise, try a few fallback paths that might work
+  const basePath =
+    assetBasePath ||
+    "/node_modules/kupos-service-item-package/dist/assets" ||
+    "./assets";
+
   switch (name) {
     case "air_condtion.png": {
-      return "./assets/images/amenities/air_condtion.svg";
+      return `${basePath}/images/amenities/air_condtion.svg`;
     }
     case "baggage.png": {
-      return "./assets/images/amenities/baggage.svg";
+      return `${basePath}/images/amenities/baggage.svg`;
     }
     case "charging_plug.png": {
-      return "./assets/images/amenities/charging_plug.svg";
+      return `${basePath}/images/amenities/charging_plug.svg`;
     }
     case "coffee.png": {
-      return "./assets/images/amenities/coffee.svg";
+      return `${basePath}/images/amenities/coffee.svg`;
     }
     case "food_new_icon.png": {
-      return "./assets/images/amenities/food_new_icon.svg";
+      return `${basePath}/images/amenities/food_new_icon.svg`;
     }
     case "gaming.png": {
-      return "./assets/images/amenities/gaming.svg";
+      return `${basePath}/images/amenities/gaming.svg`;
     }
     case "handicap.png": {
-      return "./assets/images/amenities/handicap.svg";
+      return `${basePath}/images/amenities/handicap.svg`;
     }
     case "mobile_ticket.png": {
-      return "./assets/images/amenities/mobile_ticket.svg";
+      return `${basePath}/images/amenities/mobile_ticket.svg`;
     }
     case "movie.png": {
-      return "./assets/images/amenities/movie.svg";
+      return `${basePath}/images/amenities/movie.svg`;
     }
     case "restrooms.png": {
-      return "./assets/images/amenities/Restrooms.svg";
+      return `${basePath}/images/amenities/Restrooms.svg`;
     }
     case "snacks_new.png": {
-      return "./assets/images/amenities/snacks_new.svg";
+      return `${basePath}/images/amenities/snacks_new.svg`;
     }
     case "wifi.png": {
-      return "./assets/images/amenities/wifi.svg";
+      return `${basePath}/images/amenities/wifi.svg`;
     }
     case "cortina_divisoria.png": {
-      return "./assets/images/amenities/amenity-cortina.png";
+      return `${basePath}/images/amenities/amenity-cortina.png`;
     }
     case "frazada.png": {
-      return "./assets/images/amenities/frazda_amenity.svg";
+      return `${basePath}/images/amenities/frazda_amenity.svg`;
     }
     default: {
       return "";
