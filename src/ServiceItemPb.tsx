@@ -5,152 +5,6 @@ import DateService from "./utils/DateService";
 import ModalEventManager from "./utils/ModalEventManager";
 import InternationalServicePopupBody from "./components/InternationalServicePopupBody";
 
-// Global variable to store the asset URL base path
-let assetBasePath = "";
-
-/**
- * Configure the base URL for image assets in this package
- * This should be called by the consuming application to set the proper path
- * @param basePath - The base URL path where the assets are accessible
- * @example
- * // Example usage in consuming app:
- * import { configureAssetPath } from 'kupos-service-item-package';
- * configureAssetPath('/assets/kupos-package'); // If images are copied to public/assets/kupos-package
- * // or
- * configureAssetPath('https://cdn.example.com/assets'); // If using a CDN
- */
-export function configureAssetPath(basePath: string): void {
-  assetBasePath = basePath;
-}
-
-const SvgAmenities = ({
-  moreAnemities,
-  name,
-  color,
-}: {
-  moreAnemities: boolean;
-  name: string;
-  color?: string;
-}) => {
-  const amenityKey = name.toLowerCase().replace(/\s/g, "_");
-
-  const getIconPath = () => {
-    const amenityFileName = `${amenityKey}.png`;
-    const imagePath = getAmenitiesImage(amenityFileName);
-
-    if (!imagePath) {
-      return `/public/images/amenities/${amenityKey}.svg`;
-    }
-
-    return imagePath;
-  };
-
-  const iconPath = getIconPath();
-
-  return (
-    <img
-      src={iconPath}
-      alt={name}
-      style={{
-        filter: color === "white" ? "brightness(0) invert(1)" : "",
-      }}
-      className={`object-contain ${
-        moreAnemities ? "w-[20px] h-[20px]" : "w-[16px] h-[16px]"
-      }`}
-    />
-  );
-};
-
-/**
- * Get the path to an amenity image
- * Uses the assetBasePath configured by the consumer, with fallback paths
- */
-const getAmenitiesImage = (name: string): string => {
-  // If assetBasePath is set by the consumer, use it
-  // Otherwise, try a few fallback paths that might work
-  const basePath =
-    assetBasePath ||
-    "/node_modules/kupos-service-item-package/dist/assets" ||
-    "./assets";
-
-  switch (name) {
-    case "air_condtion.png": {
-      return `${basePath}/images/amenities/air_condtion.svg`;
-    }
-    case "baggage.png": {
-      return `${basePath}/images/amenities/baggage.svg`;
-    }
-    case "charging_plug.png": {
-      return `${basePath}/images/amenities/charging_plug.svg`;
-    }
-    case "coffee.png": {
-      return `${basePath}/images/amenities/coffee.svg`;
-    }
-    case "food_new_icon.png": {
-      return `${basePath}/images/amenities/food_new_icon.svg`;
-    }
-    case "gaming.png": {
-      return `${basePath}/images/amenities/gaming.svg`;
-    }
-    case "handicap.png": {
-      return `${basePath}/images/amenities/handicap.svg`;
-    }
-    case "mobile_ticket.png": {
-      return `${basePath}/images/amenities/mobile_ticket.svg`;
-    }
-    case "movie.png": {
-      return `${basePath}/images/amenities/movie.svg`;
-    }
-    case "restrooms.png": {
-      return `${basePath}/images/amenities/Restrooms.svg`;
-    }
-    case "snacks_new.png": {
-      return `${basePath}/images/amenities/snacks_new.svg`;
-    }
-    case "wifi.png": {
-      return `${basePath}/images/amenities/wifi.svg`;
-    }
-    case "cortina_divisoria.png": {
-      return `${basePath}/images/amenities/amenity-cortina.png`;
-    }
-    case "frazada.png": {
-      return `${basePath}/images/amenities/frazda_amenity.svg`;
-    }
-    default: {
-      return "";
-    }
-  }
-};
-
-const getAmenityName = (rawAmenity: string): string => {
-  switch (rawAmenity) {
-    case "mobile ticket":
-      return "Ticket móvil";
-    case "charging plug":
-      return "Cargador";
-    case "wifi":
-      return "WiFi";
-    case "movie":
-      return "Entretenimiento";
-    case "baggage":
-      return "Equipaje";
-    case "Restrooms":
-      return "Baños";
-    case "air condtion":
-      return "Aire acondicionado";
-    case "snacks new":
-      return "Snacks";
-    case "coffee":
-      return "Café";
-    case "cortina divisoria":
-      return "Cortina Divisoria";
-    case "frazada":
-      return "";
-    default:
-      return rawAmenity;
-  }
-};
-
 const SEAT_EXCEPTIONS = ["Asiento mascota"];
 
 function ServiceItemPB({
@@ -166,6 +20,172 @@ function ServiceItemPB({
   translation,
   t = (key: string) => key,
 }: ServiceItemProps): React.ReactElement {
+  const SvgAmenities = ({
+    moreAnemities,
+    name,
+    color,
+  }: {
+    moreAnemities: boolean;
+    name: string;
+    color?: string;
+  }) => {
+    const amenityKey = name.toLowerCase().replace(/\s/g, "_");
+
+    const getIconPath = () => {
+      const amenityFileName = `${amenityKey}.png`;
+      const imagePath = getAmenitiesImage(amenityFileName);
+
+      if (!imagePath) {
+        return `/public/images/amenities/${amenityKey}.svg`;
+      }
+
+      return imagePath;
+    };
+
+    const iconPath = getIconPath();
+
+    return (
+      <img
+        src={iconPath}
+        alt={name}
+        style={{
+          filter: color === "white" ? "brightness(0) invert(1)" : "",
+        }}
+        className={`object-contain ${
+          moreAnemities ? "w-[20px] h-[20px]" : "w-[16px] h-[16px]"
+        }`}
+      />
+    );
+  };
+
+  const getAmenitiesImage = (name: string): string => {
+    switch (name) {
+      case "air_condtion.png": {
+        return serviceItem?.icons?.airConditionIcon;
+      }
+      case "baggage.png": {
+        return serviceItem?.icons?.baggageIcon;
+      }
+      case "charging_plug.png": {
+        return serviceItem?.icons?.chargingIcon;
+      }
+      case "coffee.png": {
+        return serviceItem?.icons?.coffeeIcon;
+      }
+      case "food_new_icon.png": {
+        return serviceItem?.icons?.foodIcon;
+      }
+      case "gaming.png": {
+        return serviceItem?.icons?.gamingIcon;
+      }
+      case "handicap.png": {
+        return serviceItem?.icons?.handicapIcon;
+      }
+      case "mobile_ticket.png": {
+        return serviceItem?.icons?.mobileTicketIcon;
+      }
+      case "movie.png": {
+        return serviceItem?.icons?.movieIcon;
+      }
+      case "restrooms.png": {
+        return serviceItem?.icons?.restroomsIcon;
+      }
+      case "snacks_new.png": {
+        return serviceItem?.icons?.snackIcon;
+      }
+      case "wifi.png": {
+        return serviceItem?.icons?.wifiIcon;
+      }
+      case "cortina_divisoria.png": {
+        return serviceItem?.icons?.cortinaIcon;
+      }
+      case "frazada.png": {
+        return serviceItem?.icons?.frazaIcon;
+      }
+      default: {
+        return "";
+      }
+    }
+  };
+
+  // const getAmenitiesImage = (name: string): string => {
+  //   switch (name) {
+  //     case "air_condtion.png": {
+  //       return "./assets/images/amenities/air_condtion.svg";
+  //     }
+  //     case "baggage.png": {
+  //       return "./assets/images/amenities/baggage.svg";
+  //     }
+  //     case "charging_plug.png": {
+  //       return "./assets/images/amenities/charging_plug.svg";
+  //     }
+  //     case "coffee.png": {
+  //       return "./assets/images/amenities/coffee.svg";
+  //     }
+  //     case "food_new_icon.png": {
+  //       return "./assets/images/amenities/food_new_icon.svg";
+  //     }
+  //     case "gaming.png": {
+  //       return "./assets/images/amenities/gaming.svg";
+  //     }
+  //     case "handicap.png": {
+  //       return "./assets/images/amenities/handicap.svg";
+  //     }
+  //     case "mobile_ticket.png": {
+  //       return "./assets/images/amenities/mobile_ticket.svg";
+  //     }
+  //     case "movie.png": {
+  //       return "./assets/images/amenities/movie.svg";
+  //     }
+  //     case "restrooms.png": {
+  //       return "./assets/images/amenities/Restrooms.svg";
+  //     }
+  //     case "snacks_new.png": {
+  //       return "./assets/images/amenities/snacks_new.svg";
+  //     }
+  //     case "wifi.png": {
+  //       return "./assets/images/amenities/wifi.svg";
+  //     }
+  //     case "cortina_divisoria.png": {
+  //       return "./assets/images/amenities/amenity-cortina.png";
+  //     }
+  //     case "frazada.png": {
+  //       return "./assets/images/amenities/frazda_amenity.svg";
+  //     }
+  //     default: {
+  //       return "";
+  //     }
+  //   }
+  // };
+
+  const getAmenityName = (rawAmenity: string): string => {
+    switch (rawAmenity) {
+      case "mobile ticket":
+        return "Ticket móvil";
+      case "charging plug":
+        return "Cargador";
+      case "wifi":
+        return "WiFi";
+      case "movie":
+        return "Entretenimiento";
+      case "baggage":
+        return "Equipaje";
+      case "Restrooms":
+        return "Baños";
+      case "air condtion":
+        return "Aire acondicionado";
+      case "snacks new":
+        return "Snacks";
+      case "coffee":
+        return "Café";
+      case "cortina divisoria":
+        return "Cortina Divisoria";
+      case "frazada":
+        return "";
+      default:
+        return rawAmenity;
+    }
+  };
   const currency = (amount: number) => {
     const formattedAmount = amount
       .toString()
