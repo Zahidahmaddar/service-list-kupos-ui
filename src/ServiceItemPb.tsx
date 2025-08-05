@@ -524,7 +524,7 @@ function ServiceItemPB({
             </div>
 
             {/* SEATS */}
-            <div className="content-center">
+            <div className="content-center w-[75%]">
               <div
                 className={`flex gap-[10px] text-[15px] justify-between min-h-[2.5rem] ${
                   getNumberOfSeats() < 3 ? "" : ""
