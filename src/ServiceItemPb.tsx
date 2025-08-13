@@ -18,6 +18,8 @@ function ServiceItemPB({
   cityOrigin,
   cityDestination,
   translation,
+  orignLabel,
+  destinationLabel,
   t = (key: string) => key,
 }: ServiceItemProps): React.ReactElement {
   const SvgAmenities = ({
@@ -108,56 +110,6 @@ function ServiceItemPB({
     }
   };
 
-  // const getAmenitiesImage = (name: string): string => {
-  //   switch (name) {
-  //     case "air_condtion.png": {
-  //       return "./assets/images/amenities/air_condtion.svg";
-  //     }
-  //     case "baggage.png": {
-  //       return "./assets/images/amenities/baggage.svg";
-  //     }
-  //     case "charging_plug.png": {
-  //       return "./assets/images/amenities/charging_plug.svg";
-  //     }
-  //     case "coffee.png": {
-  //       return "./assets/images/amenities/coffee.svg";
-  //     }
-  //     case "food_new_icon.png": {
-  //       return "./assets/images/amenities/food_new_icon.svg";
-  //     }
-  //     case "gaming.png": {
-  //       return "./assets/images/amenities/gaming.svg";
-  //     }
-  //     case "handicap.png": {
-  //       return "./assets/images/amenities/handicap.svg";
-  //     }
-  //     case "mobile_ticket.png": {
-  //       return "./assets/images/amenities/mobile_ticket.svg";
-  //     }
-  //     case "movie.png": {
-  //       return "./assets/images/amenities/movie.svg";
-  //     }
-  //     case "restrooms.png": {
-  //       return "./assets/images/amenities/Restrooms.svg";
-  //     }
-  //     case "snacks_new.png": {
-  //       return "./assets/images/amenities/snacks_new.svg";
-  //     }
-  //     case "wifi.png": {
-  //       return "./assets/images/amenities/wifi.svg";
-  //     }
-  //     case "cortina_divisoria.png": {
-  //       return "./assets/images/amenities/amenity-cortina.png";
-  //     }
-  //     case "frazada.png": {
-  //       return "./assets/images/amenities/frazda_amenity.svg";
-  //     }
-  //     default: {
-  //       return "";
-  //     }
-  //   }
-  // };
-
   const getAmenityName = (rawAmenity: string): string => {
     switch (rawAmenity) {
       case "mobile ticket":
@@ -186,6 +138,7 @@ function ServiceItemPB({
         return rawAmenity;
     }
   };
+
   const currency = (amount: number) => {
     const formattedAmount = amount
       .toString()
@@ -263,7 +216,7 @@ function ServiceItemPB({
       seatTypesWithPrices[2] = seatTypesWithPrices[premiumIndex];
     }
 
-    seatTypesWithPrices = seatTypesWithPrices.slice(0, 3);
+    seatTypesWithPrices = seatTypesWithPrices.slice(0, 2);
 
     return seatTypesWithPrices;
   };
@@ -280,7 +233,7 @@ function ServiceItemPB({
       SEAT_EXCEPTIONS.includes(val.label) ? null : (
         <span
           key={key}
-          className={`flex items-center gap-[10px] text-[15px] ${
+          className={`flex items-center justify-between  text-[13.33px] ${
             isSoldOut ? "text-[#c0c0c0]" : ""
           }`}
         >
@@ -296,7 +249,10 @@ function ServiceItemPB({
     const sortedSeatTypes = getSortedSeatTypes();
     return sortedSeatTypes.map((val, key: number) =>
       SEAT_EXCEPTIONS.includes(val.label) ? null : (
-        <span key={key} className="flex items-center gap-[10px] text-[15px]">
+        <span
+          key={key}
+          className="flex items-center justify-between text-[13.33px]"
+        >
           {typeof val.price === "string"
             ? currency(val.price)
             : typeof val.price === "number"
@@ -438,24 +394,59 @@ function ServiceItemPB({
             </div>
           </div>
 
-          <div className="grid grid-cols-[1.4fr_1fr_auto] gap-[3rem] text-[#464647]">
+          {/* <div className="grid grid-cols-[1.5fr_1fr_auto] gap-[3rem] sm:gap-[4rem] md:gap-[5rem] lg:gap-[6rem] xl:gap-[5rem] 2xl:gap-[7rem] text-[#464647]"> */}
+          <div className="responsive-grid w-full">
+            <style>{`
+              .responsive-grid {
+                display: grid;
+                grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.2fr) minmax(0, 1fr) auto;
+                color: #464647;
+                // padding: 0 0.5rem;
+                column-gap: 7rem;
+              }
+              @media (min-width: 640px) {
+                .responsive-grid {
+                  column-gap: 6rem;
+                }
+              }
+              @media (min-width: 768px) {
+                .responsive-grid {
+                  column-gap: 5rem;
+                }
+              }
+              @media (min-width: 1024px) {
+                .responsive-grid {
+                  column-gap: 4rem;
+                }
+              }
+            
+              @media (min-width: 1280px) {
+                .responsive-grid {
+                  column-gap: 5rem;
+                }
+              }
+            `}</style>
             {/* DATE AND TIME */}
-            <div className="w-[75%]">
+            <div className="min-h-[2.5rem] flex flex-col justify-between gap-[10px]">
               <div
-                className={`flex items-center text-[15px] justify-between mb-[10px] ${
+                className={`flex items-center text-[13.33px] justify-between  ${
                   isSoldOut ? "text-[#c0c0c0]" : ""
                 }`}
               >
-                <div className="flex items-center font-bold capitalize group ">
-                  <div className="w-[18px] h-auto mr-[8px]">
-                    <img
-                      src={serviceItem.icons?.origin}
-                      alt="origin"
-                      className={`w-[18px] h-auto mr-[8px] ${
-                        isSoldOut ? "grayscale" : ""
-                      }`}
-                    />
-                  </div>
+                <div className="flex items-center bold-text capitalize group ">
+                  {orignLabel ? (
+                    <div className="w-[60px]">{orignLabel}</div>
+                  ) : (
+                    <div className="w-[18px] h-auto mr-[8px]">
+                      <img
+                        src={serviceItem.icons?.origin}
+                        alt="origin"
+                        className={`w-[18px] h-auto mr-[8px] ${
+                          isSoldOut ? "grayscale" : ""
+                        }`}
+                      />
+                    </div>
+                  )}
                   <span className="cursor-pointer bold-text">
                     {DateService.getServiceItemDate(serviceItem.travel_date)}
                   </span>
@@ -464,11 +455,11 @@ function ServiceItemPB({
                   {serviceItem.boarding_stages && (
                     <div
                       className="hidden group-hover:block absolute top-[29%] left-[35%] ml-2 text-white px-3 py-2 rounded-[10px] whitespace-normal z-10 shadow-service  "
-                      style={{ backgroundColor: colors.tooltipColor }}
+                      style={{ backgroundColor: colors?.tooltipColor }}
                     >
                       <div
                         className="tooltip-arrow absolute top-2 -left-[7px] w-0 h-0 border-t-8 border-b-8 border-r-8 border-t-transparent border-b-transparent"
-                        style={{ borderRightColor: colors.tooltipColor }}
+                        style={{ borderRightColor: colors?.tooltipColor }}
                       ></div>
                       <div className="text-center text-[14px]">
                         {renderStages(serviceItem.boarding_stages)}
@@ -482,19 +473,23 @@ function ServiceItemPB({
                 </div>
               </div>
               <div
-                className={`flex items-center text-[15px] justify-between ${
+                className={`flex items-center text-[13.33px] justify-between ${
                   isSoldOut ? "text-[#c0c0c0]" : ""
                 }`}
               >
-                <div className="flex items-center font-bold capitalize group ">
-                  <div className="w-[18px] h-auto mr-[8px]">
-                    <img
-                      src={serviceItem.icons?.destination}
-                      className={`w-[18px] h-auto mr-[8px] ${
-                        isSoldOut ? "grayscale" : ""
-                      }`}
-                    />
-                  </div>
+                <div className="flex items-center bold-text capitalize group ">
+                  {destinationLabel ? (
+                    <div className="w-[60px]">{destinationLabel}</div>
+                  ) : (
+                    <div className="w-[18px] h-auto mr-[8px]">
+                      <img
+                        src={serviceItem.icons?.destination}
+                        className={`w-[18px] h-auto mr-[8px] ${
+                          isSoldOut ? "grayscale" : ""
+                        }`}
+                      />
+                    </div>
+                  )}
                   <span className="cursor-pointer bold-text">
                     {DateService.getServiceItemDate(serviceItem.arrival_date)}
                   </span>
@@ -503,12 +498,12 @@ function ServiceItemPB({
                   {serviceItem.dropoff_stages && (
                     <div
                       className={`hidden group-hover:block absolute top-[46%] left-[35%] ml-2 text-white px-3 py-2 rounded-[10px] whitespace-normal z-10 shadow-service`}
-                      style={{ backgroundColor: colors.tooltipColor }}
+                      style={{ backgroundColor: colors?.tooltipColor }}
                     >
                       {/* Tooltip arrow */}
                       <div
                         className="tooltip-arrow absolute top-2 -left-[7px] w-0 h-0 border-t-8 border-b-8 border-r-8 border-t-transparent border-b-transparent"
-                        style={{ borderRightColor: colors.tooltipColor }}
+                        style={{ borderRightColor: colors?.tooltipColor }}
                       ></div>
                       <div className="text-center text-[14px]">
                         {renderStages(serviceItem.dropoff_stages)}
@@ -522,26 +517,28 @@ function ServiceItemPB({
                 </div>
               </div>
             </div>
-
+            <div style={{ borderRight: "1px solid #ccc" }} />
             {/* SEATS */}
-            <div className="content-center w-[75%]">
+            <div className="content-center">
               <div
-                className={`flex gap-[10px] text-[15px] justify-between min-h-[2.5rem] ${
+                className={`flex gap-[10px] text-[13.33px] justify-between min-h-[2.5rem] ${
                   getNumberOfSeats() < 3 ? "" : ""
                 }`}
                 style={getNumberOfSeats() < 2 ? { alignItems: "center" } : {}}
               >
                 <div
-                  className={`flex flex-col ${
-                    getNumberOfSeats() < 3 ? "justify-between" : ""
-                  }`}
+                  className="flex flex-col justify-between"
+                  // className={`flex flex-col ${
+                  //   getNumberOfSeats() < 3 ? "justify-between" : ""
+                  // }`}
                 >
                   {getSeatNames()}
                 </div>
                 <div
-                  className={`flex flex-col ${
-                    getNumberOfSeats() < 3 ? "justify-between" : ""
-                  }`}
+                  className="flex flex-col justify-between"
+                  // className={`flex flex-col ${
+                  //   getNumberOfSeats() < 3 ? "justify-between" : ""
+                  // }`}
                   style={{ color: isSoldOut ? "#c0c0c0" : colors.priceColor }}
                 >
                   {getSeatPrice()}
@@ -556,7 +553,7 @@ function ServiceItemPB({
                 disabled={serviceDetailsLoading}
                 className={`w-full  ${
                   serviceDetailsLoading || isSoldOut ? "py-[6px]" : "py-[12px]"
-                } text-[15px] font-bold text-white rounded-[10px] border-none px-[20px] flex items-center justify-center`}
+                } text-[13.33px] font-bold text-white rounded-[10px] border-none px-[20px] flex items-center justify-center`}
                 style={{
                   backgroundColor:
                     serviceDetailsLoading || isSoldOut
@@ -568,19 +565,27 @@ function ServiceItemPB({
                       : "pointer",
                 }}
               >
-                <div className="min-w-[100px] flex justify-center items-center">
+                <span className="min-w-[75px] flex justify-center items-center bold-text">
                   {isSoldOut ? renderIcon("soldOutIcon", "14px") : null}
 
                   {serviceDetailsLoading ? (
                     <span className="loader-circle"></span>
                   ) : !isSoldOut ? (
-                    translation?.buyButton?.toUpperCase()
+                    translation?.buyButton
                   ) : (
-                    translation?.soldOutButton?.toUpperCase()
+                    translation?.soldOutButton
                   )}
-                </div>
+                </span>
               </button>
             </div>
+          </div>
+          <div className="flex justify-end mr-[11px]">
+            {serviceItem?.available_seats < 10 &&
+              serviceItem?.available_seats > 0 && (
+                <div className="text-[12px] text-[red] mt-1 text-center">
+                  ¡ Últimos Asientos!
+                </div>
+              )}
           </div>
 
           <div
@@ -592,7 +597,7 @@ function ServiceItemPB({
             //     ? "grid grid-cols-[1.4fr_4.8fr] gap-[3.4rem] mt-[15px] text-[13px] items-center border-t border-[#eee] mt-[15px] pt-[12px]"
             //     : "grid grid-cols-[3.17fr_4.8fr] gap-[3rem] mt-[15px] text-[13px] items-center border-t border-[#eee] mt-[15px] pt-[12px]"
             // }`}
-            className={`${"flex justify-between items-center mt-[15px] text-[13px] items-center border-t border-[#eee] mt-[15px] pt-[12px]"}`}
+            className={`${"flex justify-between items-center mt-[15px] text-[13.33px] items-center border-t border-[#eee] mt-[15px] pt-[12px]"}`}
           >
             {/* Rating */}
             <div>
@@ -601,7 +606,6 @@ function ServiceItemPB({
                   className="flex items-center cursor-pointer "
                   style={{ color: isSoldOut ? "#c0c0c0" : "" }}
                 >
-                  {/* {renderIcon("rating", "14px")} */}
                   <div className="flex items-center">
                     <div className="w-[18px] h-auto mr-[4px] relative">
                       <img
@@ -629,10 +633,10 @@ function ServiceItemPB({
                         }}
                       >
                         <div className="pt-[20px] text-center">
-                          <div className="text-[13px] bold-text text-[#464647]">
+                          <div className="text-[13.33px] bold-text text-[#464647]">
                             PUNTUACIÓN
                           </div>
-                          <div className="text-[13px] font-light text-[#464647]">
+                          <div className="text-[13.33px] font-light text-[#464647]">
                             {serviceItem.operator_service_name}
                           </div>
                         </div>
@@ -704,7 +708,7 @@ function ServiceItemPB({
                                   </div>
                                 </div>
 
-                                <span className="text-[#464647] text-[13px] ml-[10px]">
+                                <span className="text-[#464647] text-[13.33px] ml-[10px]">
                                   {rating.label}
                                 </span>
                               </div>
@@ -980,9 +984,8 @@ function ServiceItemPB({
       {/* Bottom discount banner */}
       {serviceItem?.offer_text && (
         <div
-          className={`${
-            isSoldOut ? "bg-[#ddd]" : "bg-[#ff5c60]"
-          }  text-white p-[10px_15px] text-left w-full flex items-center absolute -bottom-[36px] pt-[50px] -z-10 rounded-b-[14px] text-[14px]`}
+          className={`  text-white p-[10px_15px] text-left w-full flex items-center absolute -bottom-[36px] pt-[50px] -z-10 rounded-b-[14px] text-[14px]`}
+          style={{ backgroundColor: isSoldOut ? "" : colors?.bottomStripColor }}
         >
           <LottiePlayer
             animationData={serviceItem.icons.promoAnim}
@@ -996,7 +999,7 @@ function ServiceItemPB({
       <div className="absolute -top-[17px] left-0  w-full flex items-center justify-end gap-[12px] pr-[20px] z-10 ">
         {showTopLabel && (
           <div
-            className={`flex items-center gap-[10px] py-[8px] px-[20px] rounded-[38px] text-[15px]  z-20 ${
+            className={`flex items-center gap-[10px] py-[8px] px-[20px] rounded-[38px] text-[13.33px]  z-20 ${
               isSoldOut ? "bg-[#ddd]" : ``
             }`}
             style={{ backgroundColor: !isSoldOut && colors.ratingBottomColor }}
@@ -1019,7 +1022,7 @@ function ServiceItemPB({
         )}
         {serviceItem?.is_direct_trip && (
           <div
-            className={`flex items-center gap-[10px] py-[8px] text-white px-[20px] rounded-[38px] text-[15px] z-20 ${
+            className={`flex items-center gap-[10px] py-[8px] text-white px-[20px] rounded-[38px] text-[13.33px] z-20 ${
               isSoldOut ? "bg-[#ddd]" : `bg-[${colors.tooltipColor}]`
             }`}
           >
@@ -1033,7 +1036,7 @@ function ServiceItemPB({
         )}
         {serviceItem?.train_type_label === "Tren Express (Nuevo)" && (
           <div
-            className={`flex items-center gap-[10px] py-[8px] text-white px-[20px] rounded-[38px] text-[15px] z-20 ${
+            className={`flex items-center gap-[10px] py-[8px] text-white px-[20px] rounded-[38px] text-[13.33px] z-20 ${
               isSoldOut ? "bg-[#ddd]" : `bg-[${colors.tooltipColor}]`
             }`}
           >

@@ -133,8 +133,11 @@ export interface ServiceItemProps {
     secondaryBgColor?: string;
     secondaryTextColor?: string;
     primaryButtonTextColor?: string;
+    bottomStripColor?: string;
   };
   cityOrigin?: { value: number; label: string };
   cityDestination?: { value: number; label: string };
   translation?: { [key: string]: string };
+  orignLabel?: string;
+  destinationLabel?: string;
 }
