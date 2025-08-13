@@ -367,15 +367,13 @@ function ServiceItemPB({
         showTopLabel
           ? "mt-[30px]"
           : "mt-[20px]"
-      } 
-				
-						`}
-      // 	${
-      // 		serviceItem?.is_direct_trip ||
-      // 		serviceItem?.train_type_label === "Tren Express (Nuevo)" ||
-      // 		showTopLabel
-      // 				? ""
-      // 				: ""
+      }	`}
+      //  ${
+      //   serviceItem?.is_direct_trip ||
+      //   serviceItem?.train_type_label === "Tren Express (Nuevo)" ||
+      //   !showTopLabel
+      //     ? "mb-[60px]"
+      //     : ""
       // }
     >
       <div
