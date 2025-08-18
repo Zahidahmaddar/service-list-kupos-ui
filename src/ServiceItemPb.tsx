@@ -584,12 +584,12 @@ function ServiceItemPB({
                   className="flex items-center cursor-pointer "
                   style={{ color: isSoldOut ? "#c0c0c0" : "" }}
                 >
-                  <div className="flex items-baseline">
+                  <div className="flex items-center">
                     <div className="w-[18px] h-auto mr-[4px] relative">
                       <img
                         src={serviceItem.icons.rating}
                         alt="origin"
-                        className={`w-[16px] h-[16px] mr-[4px] object-contain mb-[2px] ${
+                        className={`w-[16px] h-[16px] mr-[4px] object-contain mb-[4px] ${
                           isSoldOut ? "grayscale" : ""
                         }`}
                         onMouseEnter={e => {
