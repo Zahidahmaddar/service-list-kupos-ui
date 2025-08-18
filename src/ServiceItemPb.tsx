@@ -396,37 +396,7 @@ function ServiceItemPB({
           </div>
 
           {/* <div className="grid grid-cols-[1.5fr_1fr_auto] gap-[3rem] sm:gap-[4rem] md:gap-[5rem] lg:gap-[6rem] xl:gap-[5rem] 2xl:gap-[7rem] text-[#464647]"> */}
-          <div className="responsive-grid w-full">
-            <style>{`
-              .responsive-grid {
-                display: grid;
-                grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.2fr) minmax(0, 1fr) auto;
-                color: #464647;
-                // padding: 0 0.5rem;
-                column-gap: 7rem;
-              }
-              @media (min-width: 640px) {
-                .responsive-grid {
-                  column-gap: 6rem;
-                }
-              }
-              @media (min-width: 768px) {
-                .responsive-grid {
-                  column-gap: 5rem;
-                }
-              }
-              @media (min-width: 1024px) {
-                .responsive-grid {
-                  column-gap: 4rem;
-                }
-              }
-            
-              @media (min-width: 1280px) {
-                .responsive-grid {
-                  column-gap: 5rem;
-                }
-              }
-            `}</style>
+          <div className="grid text-[#464647] w-full [grid-template-columns:minmax(0,1.4fr)_minmax(0,0.2fr)_minmax(0,1fr)_auto] gap-x-[7rem] min-[640px]:gap-x-[6rem] min-[768px]:gap-x-[4rem] min-[1024px]:gap-x-[4rem] min-[1280px]:gap-x-[4rem] min-[1380px]:gap-x-[5rem]">
             {/* DATE AND TIME */}
             <div className="min-h-[2.5rem] flex flex-col justify-between gap-[10px]">
               <div
@@ -518,7 +488,14 @@ function ServiceItemPB({
                 </div>
               </div>
             </div>
-            <div style={{ borderRight: "1px solid #ccc" }} />
+            <div
+              style={{
+                width: "1px",
+                height: "2.5rem",
+                backgroundColor: "#ccc",
+                margin: "auto",
+              }}
+            ></div>
             {/* SEATS */}
             <div className="content-center">
               <div
@@ -598,7 +575,7 @@ function ServiceItemPB({
             //     ? "grid grid-cols-[1.4fr_4.8fr] gap-[3.4rem] mt-[15px] text-[13px] items-center border-t border-[#eee] mt-[15px] pt-[12px]"
             //     : "grid grid-cols-[3.17fr_4.8fr] gap-[3rem] mt-[15px] text-[13px] items-center border-t border-[#eee] mt-[15px] pt-[12px]"
             // }`}
-            className={`${"flex justify-between items-center mt-[15px] text-[13.33px] items-center border-t border-[#eee] mt-[15px] pt-[12px]"}`}
+            className={`${"flex justify-between items-center mt-[15px] items-center border-t border-[#eee] mt-[15px] pt-[12px]"}`}
           >
             {/* Rating */}
             <div>
@@ -634,10 +611,10 @@ function ServiceItemPB({
                         }}
                       >
                         <div className="pt-[20px] text-center">
-                          <div className="text-[13.33px] bold-text text-[#464647]">
+                          <div className="text-[12px] bold-text text-[#464647]">
                             PUNTUACIÓN
                           </div>
-                          <div className="text-[13.33px] font-light text-[#464647]">
+                          <div className="text-[12px] font-light text-[#464647]">
                             {serviceItem.operator_service_name}
                           </div>
                         </div>
@@ -727,13 +704,13 @@ function ServiceItemPB({
                         </div>
                       </div>
                     </div>
-                    <span className="text-[#464647] bold-text">
+                    <span className="text-[#464647] bold-text text-[13.33px]">
                       {typeof serviceItem.operator_details[1] === "number"
                         ? serviceItem.operator_details[1].toFixed(1)
                         : serviceItem.operator_details[1]}
                     </span>
                   </div>
-                  <span className="ml-[10px] text-[#464647]">
+                  <span className="ml-[10px] text-[#464647] text-[13.33px]">
                     {serviceItem.operator_details[2]}
                   </span>
                 </div>
@@ -744,7 +721,7 @@ function ServiceItemPB({
 
             {/* <div className="flex justify-between items-center gap-[10px]"> */}
             {/* Duration */}
-            <div className="flex items-center relative text-[#464647]">
+            <div className="flex items-baseline relative text-[#464647]">
               {/* {renderIcon("duration", "14px")} */}
               <div
                 className={`w-[18px] h-auto mr-[4px] ${
@@ -753,8 +730,8 @@ function ServiceItemPB({
               >
                 {renderIcon("hours", "14px")}
               </div>
-              <span
-                className={`cursor-default group ${
+              <div
+                className={`cursor-default group text-[13.33px] ${
                   isSoldOut ? "text-[#c0c0c0]" : ""
                 }`}
               >
@@ -770,7 +747,7 @@ function ServiceItemPB({
                   ></div>
                   Duración estimada del viaje
                 </div>
-              </span>
+              </div>
             </div>
 
             {serviceItem.pet_seat_info &&
@@ -794,7 +771,7 @@ function ServiceItemPB({
                     style={{ backgroundColor: colors?.tooltipColor }}
                   >
                     <div
-                      className="tooltip-arrow absolute -top-[7px] left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-b-8 border-l-transparent border-r-transparent"
+                      className="tooltip-arrow absolute text-[13.33px] -top-[7px] left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-b-8 border-l-transparent border-r-transparent"
                       style={{ borderBottomColor: colors?.tooltipColor }}
                     ></div>
                     Este servicio incluye asientos para mascotas.
@@ -820,12 +797,12 @@ function ServiceItemPB({
                     </div>
                   </div>
                   <div
-                    className="hidden group-hover:block absolute top-[24px] left-1/2 -translate-x-1/2 text-white p-3 rounded-[14px] whitespace-normal z-10 mt-2.5 w-[230px] text-center break-normal shadow-service"
+                    className="hidden group-hover:block absolute top-[24px] left-1/2 -translate-x-1/2 text-white p-3 rounded-[14px] whitespace-normal z-10 mt-2.5 w-[230px] text-center break-normal shadow-service text-[13.33px]"
                     style={{ backgroundColor: colors.tooltipColor }}
                   >
                     {/* Tooltip arrow */}
                     <div
-                      className="tooltip-arrow absolute -top-[7px] left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-b-8 border-l-transparent border-r-transparent"
+                      className="tooltip-arrow absolute -top-[7px] left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-b-8 border-l-transparent border-r-transparent "
                       style={{ borderBottomColor: colors.tooltipColor }}
                     ></div>
                     Esta empresa permite cambios sin costo hasta (
@@ -879,7 +856,7 @@ function ServiceItemPB({
                               />
                             </div>
                             <div
-                              className="hidden group-hover:block absolute top-[24px] left-1/2 -translate-x-1/2 text-white p-3 rounded-[14px] whitespace-nowrap z-10 mt-2.5 text-center shadow-service"
+                              className="hidden group-hover:block absolute top-[24px] left-1/2 -translate-x-1/2 text-white p-3 rounded-[14px] whitespace-nowrap z-10 mt-2.5 text-center shadow-service text-[13.33px]"
                               style={{ backgroundColor: colors.tooltipColor }}
                             >
                               {/* Tooltip arrow */}
@@ -933,7 +910,7 @@ function ServiceItemPB({
                                         ?.toUpperCase() !== "WATER" ? (
                                       <div
                                         key={key}
-                                        className="flex items-center gap-[5px] whitespace-nowrap"
+                                        className="flex items-center gap-[5px] whitespace-nowrap text-[13.33px]"
                                       >
                                         <div
                                           className={`${
@@ -962,7 +939,7 @@ function ServiceItemPB({
                                 )}
                               {/* Tooltip arrow */}
                               <div
-                                className="tooltip-arrow absolute -left-[6px] top-[15px] w-0 h-0 border-t-8 border-b-8 border-r-8 border-t-transparent border-b-transparent"
+                                className="tooltip-arrow absolute -left-[6px] top-[15px] w-0 h-0 border-t-8 border-b-8 border-r-8 border-t-transparent border-b-transparent "
                                 style={{
                                   borderRightColor: colors.tooltipColor,
                                 }}
