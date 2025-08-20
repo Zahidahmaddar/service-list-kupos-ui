@@ -991,7 +991,7 @@ function ServiceItemPB({
             </div>
             <div
               className={
-                isSoldOut ? "text-white" : `text-[${colors.buttonColor}]`
+                isSoldOut ? "text-white" : `text-[${colors.topLabelColor}]`
               }
             >
               {showTopLabel}

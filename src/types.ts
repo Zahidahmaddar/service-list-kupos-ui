@@ -126,6 +126,7 @@ export interface ServiceItemProps {
   change_ticket_hours?: number;
   colors: {
     buttonColor?: string;
+    topLabelColor?: string;
     tooltipColor?: string;
     ratingBorderColor?: string;
     ratingBottomColor?: string;
