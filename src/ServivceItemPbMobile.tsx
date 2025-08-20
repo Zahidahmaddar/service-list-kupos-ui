@@ -1,8 +1,6 @@
 import React from "react";
 import LottiePlayer from "./assets/LottiePlayer";
 import DateService from "./utils/DateService";
-import ModalEventManager from "./utils/ModalEventManager";
-import InternationalServicePopupBody from "./components/InternationalServicePopupBody";
 import { MobileServiceItemProps } from "./mobileTypes";
 
 const SEAT_EXCEPTIONS = ["Asiento mascota"];
@@ -34,7 +32,6 @@ function ServiceItemPBMobile({
   const isPetSeat = (Object.keys(serviceItem?.pet_seat_info) || []).length > 0;
   let isSoldOut = serviceItem.available_seats <= 0;
 
-  console.log("🚀 ~ ServiceItemPBMobile ~ serviceItem:", serviceItem);
   const currency = (amount: number) => {
     const formattedAmount = amount
       .toString()
@@ -486,7 +483,7 @@ function ServiceItemPBMobile({
               </div>
               <div
                 className={
-                  isSoldOut ? "text-white" : `text-[${colors.buttonColor}]`
+                  isSoldOut ? "text-white" : `text-[${colors.topLabelColor}]`
                 }
               >
                 {showTopLabel}
@@ -497,7 +494,7 @@ function ServiceItemPBMobile({
           {isConexion && (
             <div
               className={`flex items-center gap-[2px] py-[5px] text-white px-[10px] rounded-[38px] text-[12px] z-20 ${
-                isSoldOut ? "text-white" : `text-[${colors.buttonColor}]`
+                isSoldOut ? "text-white" : `text-[${colors.topLabelColor}]`
               }`}
               style={{
                 backgroundColor: !isSoldOut && colors.ratingBottomColor,

@@ -141,7 +141,8 @@ export interface MobileServiceItemProps {
   hours?: number;
   change_ticket_hours?: number;
   colors: {
-    buttonColor?: string;
+    kuposButtonColor?: string;
+    topLabelColor?: string;
     tooltipColor?: string;
     ratingBorderColor?: string;
     ratingBottomColor?: string;

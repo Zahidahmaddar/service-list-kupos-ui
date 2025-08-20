@@ -285,7 +285,7 @@ function ServiceItemPB({
           onBookButtonPress && onBookButtonPress();
         },
         secondaryButtonText: translation?.okContinueButton,
-        primaryButtonBgColor: colors?.buttonColor,
+        primaryButtonBgColor: colors?.kuposButtonColor,
         primaryButtonTextColor: colors?.primaryButtonTextColor,
         secondaryButtonBgColor: colors?.secondaryBgColor,
         secondaryButtonTextColor: colors?.secondaryTextColor,
@@ -302,7 +302,7 @@ function ServiceItemPB({
         onPrimaryButtonClick: () => {
           onBookButtonPress && onBookButtonPress();
         },
-        primaryButtonBgColor: colors?.buttonColor,
+        primaryButtonBgColor: colors?.kuposButtonColor,
         primaryButtonTextColor: colors?.primaryButtonTextColor,
         secondaryButtonBgColor: colors?.secondaryBgColor,
         secondaryButtonTextColor: colors?.secondaryTextColor,
@@ -324,7 +324,7 @@ function ServiceItemPB({
           onBookButtonPress && onBookButtonPress();
         },
         showSecondaryButton: false,
-        primaryButtonBgColor: colors?.buttonColor,
+        primaryButtonBgColor: colors?.kuposButtonColor,
         primaryButtonTextColor: colors?.primaryButtonTextColor,
         children: (
           <>
@@ -536,7 +536,7 @@ function ServiceItemPB({
                   backgroundColor:
                     serviceDetailsLoading || isSoldOut
                       ? "lightgray"
-                      : colors.buttonColor,
+                      : colors.kuposButtonColor,
                   cursor:
                     serviceDetailsLoading || isSoldOut
                       ? "not-allowed"
