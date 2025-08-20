@@ -201,15 +201,15 @@ function ServiceItemPB({
     }
 
     let seatTypesWithPrices = serviceItem.seat_types
-      .filter(item => getFilteredSeats(item))
-      .map(val => ({
+      .filter((item) => getFilteredSeats(item))
+      .map((val) => ({
         label: val?.label,
         price: val?.fare,
       }));
 
     seatTypesWithPrices.sort((a, b) => a.price - b.price);
     const premiumIndex = seatTypesWithPrices.findIndex(
-      item => item.label === "Premium",
+      (item) => item.label === "Premium"
     );
 
     if (premiumIndex >= 3) {
@@ -223,7 +223,7 @@ function ServiceItemPB({
 
   const getNumberOfSeats = () => {
     return serviceItem.seat_types.filter(
-      val => !SEAT_EXCEPTIONS.includes(val.label),
+      (val) => !SEAT_EXCEPTIONS.includes(val.label)
     ).length;
   };
 
@@ -241,7 +241,7 @@ function ServiceItemPB({
             ? val.label
             : null}
         </span>
-      ),
+      )
     );
   };
 
@@ -259,11 +259,11 @@ function ServiceItemPB({
             ? currency(val.price)
             : null}
         </span>
-      ),
+      )
     );
   };
 
-  const getFilteredSeats = item => {
+  const getFilteredSeats = (item) => {
     return item;
   };
 
@@ -592,12 +592,12 @@ function ServiceItemPB({
                         className={`w-[16px] h-[16px] mr-[4px] object-contain mb-[4px] ${
                           isSoldOut ? "grayscale" : ""
                         }`}
-                        onMouseEnter={e => {
+                        onMouseEnter={(e) => {
                           const tooltip = e.currentTarget
                             .nextElementSibling as HTMLElement;
                           if (tooltip) tooltip.style.display = "block";
                         }}
-                        onMouseLeave={e => {
+                        onMouseLeave={(e) => {
                           const tooltip = e.currentTarget
                             .nextElementSibling as HTMLElement;
                           if (tooltip) tooltip.style.display = "none";
@@ -870,7 +870,7 @@ function ServiceItemPB({
                                 metaData.amenities[val]
                                   ?.split(".")[0]
                                   .split("_")
-                                  .join(" "),
+                                  .join(" ")
                               )}
                             </div>
                           </div>
@@ -903,7 +903,7 @@ function ServiceItemPB({
                                       1, 2, 5, 7, 8, 9, 12, 13, 14, 15,
                                     ];
                                     return exceptions.includes(
-                                      key,
+                                      key
                                     ) ? null : key >= 3 &&
                                       metaData.amenities[val]
                                         ?.split(".")[0]
@@ -930,12 +930,12 @@ function ServiceItemPB({
                                             metaData.amenities[val]
                                               ?.split(".")[0]
                                               ?.split("_")
-                                              ?.join(" "),
+                                              ?.join(" ")
                                           )}
                                         </span>
                                       </div>
                                     ) : null;
-                                  },
+                                  }
                                 )}
                               {/* Tooltip arrow */}
                               <div

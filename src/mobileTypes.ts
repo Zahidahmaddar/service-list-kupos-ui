@@ -1,12 +1,12 @@
 import React from "react";
 
 // Define types for ServiceItemPB component
-export interface ServiceItemProps {
-  metaData?: any;
+export interface MobileServiceItemProps {
   busStage?: Record<string, string>;
-  children?: React.ReactNode;
+  amenitiesData?: any;
   serviceItem: {
     id: string;
+    is_transpordo: boolean;
     operator_details: [
       string,
       string | number,
@@ -110,18 +110,34 @@ export interface ServiceItemProps {
       wifiIcon?: string;
       cortinaIcon?: string;
       frazaIcon?: string;
+      airportIcon?: string;
       [key: string]: string | Record<string, string | undefined> | undefined;
     };
     useLottieFor?: string[];
   };
   onBookButtonPress?: () => void;
   terminals?: any[];
-  t?: (key: string) => string;
-  serviceDetailsLoading?: boolean;
-  query?: {
-    city_origin?: string;
-    city_destination?: string;
-  };
+  showDropdown?: boolean;
+  setShowDropdown?: (value: boolean) => void;
+  setAmenetiesAtomValue: (
+    value:
+      | {
+          service: MobileServiceItemProps["serviceItem"];
+          showTopLabel: string | boolean;
+        }
+      | null
+      | ((curr:
+          | {
+              service: MobileServiceItemProps["serviceItem"];
+              showTopLabel: string | boolean;
+            }
+          | null) =>
+          | {
+              service: MobileServiceItemProps["serviceItem"];
+              showTopLabel: string | boolean;
+            }
+          | null)
+  ) => void;
   hours?: number;
   change_ticket_hours?: number;
   colors: {
@@ -135,13 +151,8 @@ export interface ServiceItemProps {
     primaryButtonTextColor?: string;
     bottomStripColor?: string;
   };
-  cityOrigin?: { value: number; label: string };
-  cityDestination?: { value: number; label: string };
-  translation?: { [key: string]: string };
+
   orignLabel?: string;
   destinationLabel?: string;
   variant?: "desktop" | "mobile" | "auto";
-  mobileServiceItem?: ServiceItemProps["serviceItem"];
-  mobileColors?: ServiceItemProps["colors"];
-  mobileTranslation?: ServiceItemProps["translation"];
 }
