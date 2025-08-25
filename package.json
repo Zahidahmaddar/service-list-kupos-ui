@@ -1,6 +1,6 @@
 {
   "name": "kupos-service-item-package",
-  "version": "1.1.10",
+  "version": "1.1.11",
   "description": "A reusable service item component",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
