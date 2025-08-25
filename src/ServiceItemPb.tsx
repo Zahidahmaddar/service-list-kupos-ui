@@ -998,6 +998,20 @@ function ServiceItemPB({
             </div>
           </div>
         )}
+        {serviceItem?.is_transpordo && (
+          <div
+            className={`flex items-center gap-[10px] py-[8px] text-white px-[20px] rounded-[38px] text-[13.33px] z-20 ${
+              isSoldOut ? "bg-[#ddd]" : `bg-[${colors.tooltipColor}]`
+            }`}
+          >
+            <LottiePlayer
+              animationData={serviceItem.icons.connectingServiceIcon}
+              width="20px"
+              height="20px"
+            />
+            <div>{"Conexión"}</div>
+          </div>
+        )}
         {serviceItem?.is_direct_trip && (
           <div
             className={`flex items-center gap-[10px] py-[8px] text-white px-[20px] rounded-[38px] text-[13.33px] z-20 ${

@@ -55,6 +55,7 @@ export interface ServiceItemProps {
     train_type_label?: string;
     offer_text?: string;
     is_direct_trip?: boolean;
+    is_transpordo?: boolean;
     is_train_type?: boolean;
     operator_service_name?: string;
     dep_validation_text?: string;
@@ -88,6 +89,7 @@ export interface ServiceItemProps {
       directo?: string;
       directoAnim?: string;
       petFriendlyAnim?: string;
+      connectingServiceIcon?: string;
       priorityStageAnim?: string;
       promoAnim?: string;
       priority?: string;
