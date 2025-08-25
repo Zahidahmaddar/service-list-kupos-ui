@@ -1,6 +1,6 @@
 import React from "react";
-import LottiePlayer from "./assets/LottiePlayer";
-import DateService from "./utils/DateService";
+import LottiePlayer from "../../assets/LottiePlayer";
+import DateService from "../../utils/DateService";
 import { MobileServiceItemProps } from "./mobileTypes";
 
 const SEAT_EXCEPTIONS = ["Asiento mascota"];
@@ -17,7 +17,7 @@ const exceptions = [
   "asiento_mascota",
 ];
 
-function ServiceItemPBMobile({
+function ServiceItemMobile({
   serviceItem,
   onBookButtonPress,
   colors,
@@ -541,4 +541,4 @@ function ServiceItemPBMobile({
   );
 }
 
-export default ServiceItemPBMobile;
+export default ServiceItemMobile;

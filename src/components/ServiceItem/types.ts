@@ -1,12 +1,12 @@
 import React from "react";
 
 // Define types for ServiceItemPB component
-export interface MobileServiceItemProps {
+export interface ServiceItemProps {
+  metaData?: any;
   busStage?: Record<string, string>;
-  amenitiesData?: any;
+  children?: React.ReactNode;
   serviceItem: {
     id: string;
-    is_transpordo: boolean;
     operator_details: [
       string,
       string | number,
@@ -55,6 +55,7 @@ export interface MobileServiceItemProps {
     train_type_label?: string;
     offer_text?: string;
     is_direct_trip?: boolean;
+    is_transpordo?: boolean;
     is_train_type?: boolean;
     operator_service_name?: string;
     dep_validation_text?: string;
@@ -88,6 +89,7 @@ export interface MobileServiceItemProps {
       directo?: string;
       directoAnim?: string;
       petFriendlyAnim?: string;
+      connectingServiceIcon?: string;
       priorityStageAnim?: string;
       promoAnim?: string;
       priority?: string;
@@ -110,34 +112,18 @@ export interface MobileServiceItemProps {
       wifiIcon?: string;
       cortinaIcon?: string;
       frazaIcon?: string;
-      airportIcon?: string;
       [key: string]: string | Record<string, string | undefined> | undefined;
     };
     useLottieFor?: string[];
   };
   onBookButtonPress?: () => void;
   terminals?: any[];
-  showDropdown?: boolean;
-  setShowDropdown?: (value: boolean) => void;
-  setAmenetiesAtomValue: (
-    value:
-      | {
-          service: MobileServiceItemProps["serviceItem"];
-          showTopLabel: string | boolean;
-        }
-      | null
-      | ((curr:
-          | {
-              service: MobileServiceItemProps["serviceItem"];
-              showTopLabel: string | boolean;
-            }
-          | null) =>
-          | {
-              service: MobileServiceItemProps["serviceItem"];
-              showTopLabel: string | boolean;
-            }
-          | null)
-  ) => void;
+  t?: (key: string) => string;
+  serviceDetailsLoading?: boolean;
+  query?: {
+    city_origin?: string;
+    city_destination?: string;
+  };
   hours?: number;
   change_ticket_hours?: number;
   colors: {
@@ -152,8 +138,26 @@ export interface MobileServiceItemProps {
     primaryButtonTextColor?: string;
     bottomStripColor?: string;
   };
-
+  cityOrigin?: { value: number; label: string };
+  cityDestination?: { value: number; label: string };
+  translation?: { [key: string]: string };
   orignLabel?: string;
   destinationLabel?: string;
   variant?: "desktop" | "mobile" | "auto";
+  mobileServiceItem?: ServiceItemProps["serviceItem"];
+  mobileColors?: ServiceItemProps["colors"];
+  mobileTranslation?: ServiceItemProps["translation"];
+  showDropdown?: boolean;
+  setShowDropdown?: (value: boolean) => void;
+  setAmenetiesAtomValue?: (value: {
+    service: ServiceItemProps["serviceItem"];
+    showTopLabel: string | boolean;
+  } | null | ((curr: {
+    service: ServiceItemProps["serviceItem"];
+    showTopLabel: string | boolean;
+  } | null) => {
+    service: ServiceItemProps["serviceItem"];
+    showTopLabel: string | boolean;
+  } | null)) => void;
+  amenitiesData?: any;
 }

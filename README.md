@@ -13,8 +13,12 @@ yarn add service-item-package
 
 ## Usage
 
+### Using the KuposUIComponent
+
+The `KuposUIComponent` is a versatile component that can render different UI components based on the `typeOfComponent` prop:
+
 ```jsx
-import { ServiceItemPB } from "service-item-package";
+import { KuposUIComponent } from "service-item-package";
 import "service-item-package/dist/styles.css"; // If you add CSS in the future
 
 // Sample data
@@ -42,6 +46,42 @@ const serviceItem = {
 function App() {
   return (
     <div>
+      {/* Render Service Item */}
+      <KuposUIComponent
+        typeOfComponent="serviceitem"
+        variant="desktop"
+        serviceItem={serviceItem}
+        onBookButtonPress={() => console.log("Book pressed!")}
+      />
+      
+      {/* Render Payment Sidebar */}
+      <KuposUIComponent
+        typeOfComponent="paymentsidebar"
+        variant="desktop"
+        // Add payment sidebar specific props here
+      />
+      
+      {/* Render Service List */}
+      <KuposUIComponent
+        typeOfComponent="servicelist"
+        variant="mobile"
+        // Add service list specific props here
+      />
+    </div>
+  );
+}
+```
+
+### Using Individual Components
+
+You can also use the individual components directly:
+
+```jsx
+import { ServiceItemPB } from "service-item-package";
+
+function App() {
+  return (
+    <div>
       <ServiceItemPB
         serviceItem={serviceItem}
         onBookButtonPress={() => console.log("Book pressed!")}
@@ -53,7 +93,15 @@ function App() {
 
 ## Props
 
-The component accepts the following props:
+### KuposUIComponent Props
+
+| Prop            | Type     | Description                                                |
+| --------------- | -------- | ---------------------------------------------------------- |
+| typeOfComponent | string   | Type of component to render: "serviceitem", "paymentsidebar", or "servicelist" |
+| variant         | string   | "mobile" or "desktop" to specify the variant               |
+| ...other props  | various  | All props required by the specific component type          |
+
+### ServiceItem Props
 
 | Prop                  | Type     | Description                                  |
 | --------------------- | -------- | -------------------------------------------- |
